@@ -4,13 +4,13 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import Page1 from '../pages/Page1/Page1';
+import Home from '../pages/Home/Home';
 import Page2 from '../pages/Page2/Page2';
 
 const RoutesConfig = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Page1 />} exact />
+      <Route path="/" element={<Home />} exact />
       <Route path="/2" element={<Page2 />} exact />
     </Routes>
   </BrowserRouter>

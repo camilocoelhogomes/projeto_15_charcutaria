@@ -31,9 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-    background-color: #8F53BF;
-    padding: 24px 16px 16px 16px;
-
+    background-color: #f2eded;
 }
 ol, ul {
 	list-style: none;
