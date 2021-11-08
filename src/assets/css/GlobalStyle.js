@@ -31,9 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-    background-color: #8F53BF;
-    padding: 24px 16px 16px 16px;
-
+    background-color: #f3f3f3;
 }
 ol, ul {
 	list-style: none;
@@ -55,7 +53,7 @@ h1{
     font-family: 'SairaStencilOne', sans-serif;
     font-size: 32px;
     line-height: 50px;
-    color:#FFFFFF;
+    color:#000000;
 }
 
 h2{
