@@ -23,8 +23,7 @@ const SignUp = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     signUpConnection({ ...user })
-      .then(() => navigate('/sign-in'))
-      .catch((err) => console.log(err));
+      .then(() => navigate('/sign-in'));
   };
 
   return (
