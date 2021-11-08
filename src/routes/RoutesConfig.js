@@ -4,14 +4,12 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import Page2 from '../pages/Page2/Page2';
-import SignUp from '../pages/signUp/SignUp';
+import Checkout from '../pages/checkout/Checkout';
 
 const RoutesConfig = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/sign-up" element={<SignUp />} exact />
-      <Route path="/2" element={<Page2 />} exact />
+      <Route path="/checkout" element={<Checkout />} exact />
     </Routes>
   </BrowserRouter>
 );

@@ -1,7 +1,13 @@
 /* eslint-disable no-tabs */
 import { createGlobalStyle } from 'styled-components';
+import RalewayRegular from '../fonts/Raleway/Raleway-Medium.ttf';
 
 const GlobalStyle = createGlobalStyle`
+
+@font-face {
+    font-family: 'RalewayRegular';
+    src: url(${RalewayRegular}) format('truetype');
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -49,19 +55,11 @@ table {
 	border-spacing: 0;
 }
 
-h1{
-    font-family: 'SairaStencilOne', sans-serif;
-    font-size: 32px;
-    line-height: 50px;
-    color:#000000;
-}
-
 h2{
-    font-family: 'RelewayBold';
-    font-size: 26px;
+    font-family: 'RalewayRegular';
+    font-size: 42px;
     line-height: 31px;
-    color:#FFFFFF;
-    font-weight: 700;
+    color: #1D1F22;
 }
 
 input:focus, textarea:focus, select:focus{
@@ -75,6 +73,11 @@ button{
   cursor: pointer;
   background-color: inherit;
   border: none;
+}
+
+:root{
+    --c-dark: #1D1F22;
+    --c-light: #F1F2F3;
 }
 `;
 
