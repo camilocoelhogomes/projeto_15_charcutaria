@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IoIosArrowForward } from 'react-icons/io';
 import Header from '../../components/Header';
 
 const product = [
@@ -35,21 +36,33 @@ const product = [
   },
 ];
 
-const Home = () => (
+const Category = () => (
   <>
     <Header />
     <Body>
       <Menu>
         <h1>Categorias</h1>
+        <div>
+          <p>Defumados</p>
+          <IoIosArrowForward size="22px" />
+        </div>
+        <div>
+          <p>Geléias</p>
+          <IoIosArrowForward size="22px" />
+        </div>
+        <div>
+          <p>Molhos</p>
+          <IoIosArrowForward size="22px" />
+        </div>
       </Menu>
       <Products>
         <Sort>
-          <h1>Ordenado por</h1>
-          <h1>
+          <h2>Ordenado por</h2>
+          <h2>
             {product.length}
             {' '}
             produtos encontrados
-          </h1>
+          </h2>
         </Sort>
         <Product>
           {product.map((p) => (
@@ -68,7 +81,7 @@ const Home = () => (
   </>
 );
 
-export default Home;
+export default Category;
 
 const Body = styled.div`
   display: flex;
@@ -78,10 +91,24 @@ const Menu = styled.div`
   background-color: #00FF;
   width: 20%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  div{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
 
   h1{
     font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  p{
+    font-size: 20px;
+    margin-bottom: 18px;
+    margin-right: 30px;
   }
 `;
 
@@ -102,7 +129,7 @@ const Sort = styled.div`
   justify-content: space-between;
   padding: 0 15px;
 
-  h1{
+  h2{
     font-size: 18px;
     color: #000;
   }
