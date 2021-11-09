@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoIosArrowForward } from 'react-icons/io';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const product = [
   {
@@ -78,6 +79,7 @@ const Category = () => (
         </Product>
       </Products>
     </Body>
+    <Footer />
   </>
 );
 
@@ -88,7 +90,6 @@ const Body = styled.div`
 `;
 
 const Menu = styled.div`
-  background-color: #00FF;
   width: 20%;
   display: flex;
   flex-direction: column;
@@ -103,6 +104,7 @@ const Menu = styled.div`
   h1{
     font-size: 28px;
     margin-bottom: 25px;
+    color: #000;
   }
 
   p{
@@ -117,7 +119,6 @@ const Products = styled.div`
 `;
 
 const Product = styled.div`
-  background-color: #cecece;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
