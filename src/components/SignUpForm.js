@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import SignInput from './SignInput';
 import UserContext from '../store/UserContext';
 
-const SignUpForm = ({ submitForm, buttonText }) => {
+const SignUpForm = ({ submitForm, buttonText, headerText }) => {
   const { user, updateUser } = useContext(UserContext);
 
   return (
     <StyledSignUpForm onSubmit={submitForm}>
+      <h2>{headerText}</h2>
       <div className="name-area">
         <SignInput
           placeholder="Nome"
@@ -22,15 +23,18 @@ const SignUpForm = ({ submitForm, buttonText }) => {
       </div>
       <SignInput
         placeholder="E-mail"
+        type="email"
         value={user.userEmail}
         onChange={(e) => updateUser({ input: 'userEmail', value: e.target.value })}
       />
       <SignInput
         placeholder="Senha"
+        type="password"
         value={user.userPassword}
         onChange={(e) => updateUser({ input: 'userPassword', value: e.target.value })}
       />
       <SignInput
+        type="password"
         placeholder="Confirmar senha"
         value={user.userConfirmPassword}
         onChange={(e) => updateUser({ input: 'userConfirmPassword', value: e.target.value })}
