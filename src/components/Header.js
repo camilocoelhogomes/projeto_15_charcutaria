@@ -5,7 +5,12 @@ import logo from '../assets/logo.svg';
 
 const Header = () => (
   <Body>
-    <Logo><img src={logo} alt="logo" /></Logo>
+    <Options>
+      <img src={logo} alt="logo" />
+      <h1>Defumados</h1>
+      <h1>Geléias</h1>
+      <h1>Molhos</h1>
+    </Options>
     <Icons>
       <UserIcon />
       <CartIcon />
@@ -25,17 +30,23 @@ const Body = styled.div`
   top: 0;
   left: 0;
   border: none;
-  background-color: #FFF;
+  background-color: #b30b0b;
+  padding: 0 70px;
 `;
 
-const Logo = styled.h1`
-  font-size: 50px;
-  color: #000;
-  cursor: pointer;
-  font-family: 'Nova Flat';
+const Options = styled.div`
+  display: flex;
+  align-items: center;
+  
+  h1{
+    color: #000;
+    font-size: 20px;
+    margin-right: 15px;
+  }
 
   img{
     width: 150px;
+    margin-right: 30px;
   }
 `;
 
