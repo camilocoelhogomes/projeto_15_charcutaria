@@ -1,12 +1,10 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import LogInButton from './components/logInButton';
 
 const Checkout = () => (
   <StyledSCheckout>
-    <LogInButton>ENTRE EM SUA CONTA</LogInButton>
-    <p>Ou preencha os dados abaixo</p>
-    <h2>1. Detalhes</h2>
+    <Outlet />
   </StyledSCheckout>
 );
 
