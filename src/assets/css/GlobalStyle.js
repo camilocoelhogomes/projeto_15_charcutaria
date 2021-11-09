@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     --c-light: #F1F2F3;
     --c-dark-variant: #43464E;
     --c-text: #1D1F22;
+    --c-primary: #5ECE7B;
 }
 
 html, body, div, span, applet, object, iframe,
