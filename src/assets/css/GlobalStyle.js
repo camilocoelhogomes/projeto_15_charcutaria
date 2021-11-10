@@ -27,6 +27,8 @@ const GlobalStyle = createGlobalStyle`
     --c-dark-variant: #43464E;
     --c-text: #1D1F22;
     --c-primary: #5ECE7B;
+    --c-danger: #d12727;
+    --c-success: #5ECE7B;
 }
 
 html, body, div, span, applet, object, iframe,

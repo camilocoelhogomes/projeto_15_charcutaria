@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import SignInput from './SignInput';
 import UserContext from '../store/UserContext';
+import PassWordRequirements from './PassWordRequirements';
 
 const SignUpForm = ({ submitForm, buttonText, headerText }) => {
   const { user, updateUser } = useContext(UserContext);
@@ -38,6 +39,10 @@ const SignUpForm = ({ submitForm, buttonText, headerText }) => {
         placeholder="Confirmar senha"
         value={user.userConfirmPassword}
         onChange={(e) => updateUser({ input: 'userConfirmPassword', value: e.target.value })}
+      />
+      <PassWordRequirements
+        password={user.userPassword}
+        passwordConfirm={user.userConfirmPassword}
       />
       <button type="submit" className="submit-button">
         {buttonText}
