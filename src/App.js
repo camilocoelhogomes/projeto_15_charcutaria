@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('charcutaria')) {
-      const localUser = JSON.parse(localStorage.getItem('myWallet'));
+      const localUser = JSON.parse(localStorage.getItem('charcutaria'));
       setUser(localUser);
     }
   }, []);
