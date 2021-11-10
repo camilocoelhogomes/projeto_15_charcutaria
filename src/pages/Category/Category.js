@@ -7,39 +7,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { showProducts } from '../../services/API/server';
 
-// const product = [
-//   {
-//     name: 'Bacon',
-//     price: 59.90,
-//     image: 'https://images.tcdn.com.br/img/img_prod/829376/bacon_artesanal_f_a_em_peca_250g_15_1_3e234c42d3aea5c9b3646d56d0b0ccf5.jpg',
-//   },
-//   {
-//     name: 'Presunto',
-//     price: 39.90,
-//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-//   },
-//   {
-//     name: 'Presunto',
-//     price: 39.90,
-//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-//   },
-//   {
-//     name: 'Bacon',
-//     price: 59.90,
-//     image: 'https://images.tcdn.com.br/img/img_prod/829376/bacon_artesanal_f_a_em_peca_250g_15_1_3e234c42d3aea5c9b3646d56d0b0ccf5.jpg',
-//   },
-//   {
-//     name: 'Presunto',
-//     price: 39.90,
-//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-//   },
-//   {
-//     name: 'Presunto',
-//     price: 39.90,
-//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-//   },
-// ];
-
 const Category = ({ category }) => {
   const navigate = useNavigate();
   const [changeArrowCat1, setChangeArrowCat1] = useState(false);
@@ -64,7 +31,7 @@ const Category = ({ category }) => {
   useEffect(() => {
     listProducts();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [category]);
 
   function goTo(path) {
     navigate(path);
@@ -134,12 +101,12 @@ const Category = ({ category }) => {
           </Sort>
           <Product>
             {products.map((p) => (
-              <Content>
-                <img src={p.image} alt={p.name} />
+              <Content key={p.id}>
+                <img src={p.img} alt={p.name} />
                 <Info>{p.name}</Info>
                 <Price>
                   R$
-                  {p.price.toFixed(2)}
+                  {p.price}
                 </Price>
               </Content>
             ))}
@@ -222,6 +189,7 @@ const Content = styled.div`
   text-decoration: none;
   img{ 
       height: 300px;
+      width: 95%;
       margin-bottom: 10px;  
   }
   :hover{

@@ -8,9 +8,9 @@ const signUpConnection = ({
   userName, userLastName, userEmail, userPassword, userConfirmPassword,
 });
 
-const showProducts = ({
+const showProducts = (
   query,
-}) => axios.get(`${API}/category/${query}`);
+) => axios.get(`${API}/category${query}`);
 
 export {
   // eslint-disable-next-line import/prefer-default-export
