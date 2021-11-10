@@ -9,8 +9,8 @@ const signUpConnection = ({
 });
 
 const showProducts = (
-  query,
-) => axios.get(`${API}/category${query}`);
+  query, sort,
+) => axios.get(`${API}/category${query}${sort}`);
 
 export {
   // eslint-disable-next-line import/prefer-default-export

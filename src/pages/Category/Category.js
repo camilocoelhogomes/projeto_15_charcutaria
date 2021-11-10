@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoIosArrowForward, IoIosArrowDown } from 'react-icons/io';
-import Select from 'react-select';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { showProducts } from '../../services/API/server';
@@ -12,26 +11,25 @@ const Category = ({ category }) => {
   const [changeArrowCat1, setChangeArrowCat1] = useState(false);
   const [changeArrowCat2, setChangeArrowCat2] = useState(false);
   const [changeArrowCat3, setChangeArrowCat3] = useState(false);
+  const [filter, setFilter] = useState('recent');
   const [products, setProducts] = useState([]);
-  const options = [
-    { value: 'Mais recentes', label: 'Mais recentes' },
-    { value: 'Menor preço', label: 'Menor preço' },
-    { value: 'Maior preço', label: 'Maior preço' },
-  ];
 
   function listProducts() {
     const query = `?page=${category}`;
+    const sort = `&orderBy=${filter}`;
 
-    const req = showProducts(query);
+    const req = showProducts(query, sort);
     req.then((res) => {
       setProducts(res.data);
     });
+    // eslint-disable-next-line no-alert
+    req.catch(() => alert('Ocorreu um erro no servidor ao tentar obter os produtos. Tente novamente.'));
   }
 
   useEffect(() => {
     listProducts();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
+  }, [category, filter]);
 
   function goTo(path) {
     navigate(path);
@@ -91,7 +89,11 @@ const Category = ({ category }) => {
           <Sort>
             <div>
               <h2>Ordenado por</h2>
-              <Select options={options} />
+              <Select onChange={(e) => setFilter(e.target.value)}>
+                <option value="recent">Mais recentes</option>
+                <option value="lowest">Menor preço</option>
+                <option value="biggest">Maior preço</option>
+              </Select>
             </div>
             <h2>
               {products.length}
@@ -178,6 +180,22 @@ const Sort = styled.div`
   }
 `;
 
+const Select = styled.select`
+  height: 35px;
+  background: #f2d3cb;
+  color: gray;
+  border: none;
+
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
+`;
+
 const Content = styled.div`
   height: 400px;
   width: 300px;
@@ -202,7 +220,7 @@ const Info = styled.p`
   font-size: 15px;
   margin: 6px 0;
   align-self: flex-start;
-  margin-left: 2px;
+  margin-left: 7px;
   font-weight: bold;
 `;
 
@@ -210,6 +228,6 @@ const Price = styled.p`
   font-size: 20px;
   margin: 6px 0;
   align-self: flex-start;
-  margin-left: 2px;
+  margin-left: 7px;
   font-weight: bold;
 `;
