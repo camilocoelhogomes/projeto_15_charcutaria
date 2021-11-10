@@ -16,7 +16,7 @@ const SignInCheckout = () => {
     const passwordPatter = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/;
     if (
       !passwordPatter.test(user.userPassword)
-      && user.userPassword !== user.userConfirmPassword) return;
+    ) { setError(true); return; }
     signInConnection({ ...user })
       .then(() => navigate('/checkout/shipping'))
       .catch(() => { setError(true); });
