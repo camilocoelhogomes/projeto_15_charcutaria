@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import SignUpForm from '../../../components/SignUpForm';
-import { signUpConnection } from '../../../services/API/server';
-import UserContext from '../../../store/UserContext';
-import LogInButton from '../../../components/LogInButton';
+import SignUpForm from '../../components/SignUpForm';
+import { signUpConnection } from '../../services/API/server';
+import UserContext from '../../store/UserContext';
+import LogInButton from '../../components/LogInButton';
 
-const SignUpCheckout = () => {
+const SignUp = () => {
   const { user } = useContext(UserContext);
   const [emailError, setEmailError] = useState(false);
   const navigate = useNavigate();
@@ -18,14 +18,14 @@ const SignUpCheckout = () => {
       !passwordPatter.test(user.userPassword)
       && user.userPassword !== user.userConfirmPassword) return;
     signUpConnection({ ...user })
-      .then(() => navigate('/checkout/shipping'))
+      .then(() => navigate('/sign-in'))
       .catch((err) => { if (err.response.status === 409) setEmailError(true); });
   };
 
   return (
-    <StyledSignUpCheckout>
+    <StyledSignUp>
       <LogInButton
-        onClick={() => navigate('/checkout/sign-in')}
+        onClick={() => navigate('/sign-in')}
       >
         ENTRE NA SUA CONTA
 
@@ -33,18 +33,18 @@ const SignUpCheckout = () => {
       <p>Ou preencha os dados a baixo</p>
       <SignUpForm
         submitForm={onSubmit}
-        buttonText="ENTREGA"
-        headerText="1. Cadastro"
+        buttonText="CADASTRAR"
+        headerText="Cadastro"
         emailError={emailError}
         setEmailError={setEmailError}
       />
-    </StyledSignUpCheckout>
+    </StyledSignUp>
   );
 };
 
-export default SignUpCheckout;
+export default SignUp;
 
-const StyledSignUpCheckout = styled.div`
+const StyledSignUp = styled.div`
   width: 100%;
   max-width: 1050px;
   display: flex;

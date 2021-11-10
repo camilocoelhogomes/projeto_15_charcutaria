@@ -4,7 +4,9 @@ import SignInput from './SignInput';
 import UserContext from '../store/UserContext';
 import PassWordRequirements from './PassWordRequirements';
 
-const SignUpForm = ({ submitForm, buttonText, headerText }) => {
+const SignUpForm = ({
+  submitForm, buttonText, headerText, emailError, setEmailError,
+}) => {
   const { user, updateUser } = useContext(UserContext);
 
   return (
@@ -15,30 +17,40 @@ const SignUpForm = ({ submitForm, buttonText, headerText }) => {
           placeholder="Nome"
           value={user.userName}
           onChange={(e) => updateUser({ input: 'userName', value: e.target.value })}
+          required
         />
         <SignInput
           placeholder="Sobrenome"
           value={user.userLastName}
           onChange={(e) => updateUser({ input: 'userLastName', value: e.target.value })}
+          required
         />
       </div>
-      <SignInput
-        placeholder="E-mail"
-        type="email"
-        value={user.userEmail}
-        onChange={(e) => updateUser({ input: 'userEmail', value: e.target.value })}
-      />
+      <div className="email-area">
+        <SignInput
+          placeholder="E-mail"
+          type="email"
+          value={user.userEmail}
+          onChange={(e) => { setEmailError(false); updateUser({ input: 'userEmail', value: e.target.value }); }}
+          required
+        />
+        <div className="email-error">
+          <p>{emailError ? 'E-mail já existente' : ''}</p>
+        </div>
+      </div>
       <SignInput
         placeholder="Senha"
         type="password"
         value={user.userPassword}
         onChange={(e) => updateUser({ input: 'userPassword', value: e.target.value })}
+        required
       />
       <SignInput
         type="password"
         placeholder="Confirmar senha"
         value={user.userConfirmPassword}
         onChange={(e) => updateUser({ input: 'userConfirmPassword', value: e.target.value })}
+        required
       />
       <PassWordRequirements
         password={user.userPassword}
@@ -72,5 +84,19 @@ const StyledSignUpForm = styled.form`
     font-family: 'RalewaySemiBold';
     color: var(--c-light);
     font-size: 16px;
+  }
+  .email-area{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .email-error{
+    height: 12px;
+    p{
+    color: var(--c-danger);
+    font-family: 'RobotoMedium';
+    font-size: 12px;
+  }
   }
 `;
