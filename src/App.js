@@ -19,7 +19,7 @@ function App() {
   };
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, updateUser, setUser }}>
       <GlobalStyle />
       <RoutesConfig />
     </UserContext.Provider>
