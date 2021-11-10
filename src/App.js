@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GlobalStyle from './assets/css/GlobalStyle';
 import RoutesConfig from './routes/RoutesConfig';
 import UserContext from './store/UserContext';
@@ -17,6 +17,13 @@ function App() {
     newUser[input] = value;
     setUser(newUser);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('charcutaria')) {
+      const localUser = JSON.parse(localStorage.getItem('myWallet'));
+      setUser(localUser);
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, updateUser, setUser }}>

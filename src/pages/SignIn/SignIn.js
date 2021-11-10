@@ -25,6 +25,7 @@ const SignIn = () => {
     signInConnection({ ...user })
       .then((res) => {
         setUser(res.data);
+        localStorage.setItem('charcutaria', JSON.stringify(res.data));
         navigate('/');
       })
       .catch(() => setError(true));
