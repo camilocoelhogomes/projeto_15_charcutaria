@@ -3,19 +3,19 @@ import styled from 'styled-components';
 
 const PassWordRequirements = ({ password, passwordConfirm }) => (
   <StyledPassWordRequidements>
-    <StyledPassWordRequidement fit={/(?=.{8,})/.test(password)}>
+    <StyledPassWordRequidement fit={/(?=.{8,})/.test(password) && password}>
       Deve conter pelo menos 8 cadacteres
     </StyledPassWordRequidement>
-    <StyledPassWordRequidement fit={/(?=.*[a-z])/.test(password)}>
+    <StyledPassWordRequidement fit={/(?=.*[a-z])/.test(password) && password}>
       Deve conter letras minusculas
     </StyledPassWordRequidement>
-    <StyledPassWordRequidement fit={/(?=.*[A-Z])/.test(password)}>
+    <StyledPassWordRequidement fit={/(?=.*[A-Z])/.test(password) && password}>
       Deve conter letras maiusculas
     </StyledPassWordRequidement>
-    <StyledPassWordRequidement fit={/(?=.*[0-9])/.test(password)}>
+    <StyledPassWordRequidement fit={/(?=.*[0-9])/.test(password) && password}>
       Deve conter números
     </StyledPassWordRequidement>
-    <StyledPassWordRequidement fit={/(?=.*[^A-Za-z0-9])/.test(password)}>
+    <StyledPassWordRequidement fit={/(?=.*[^A-Za-z0-9])/.test(password) && password}>
       Deve conter caractores especiais
     </StyledPassWordRequidement>
     <StyledPassWordRequidement fit={(passwordConfirm === password && password)}>
