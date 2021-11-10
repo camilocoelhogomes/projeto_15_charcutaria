@@ -28,7 +28,6 @@ const SignUp = () => {
         onClick={() => navigate('/sign-in')}
       >
         ENTRE NA SUA CONTA
-
       </LogInButton>
       <p>Ou preencha os dados a baixo</p>
       <SignUpForm
