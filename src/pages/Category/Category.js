@@ -1,60 +1,91 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoIosArrowForward, IoIosArrowDown } from 'react-icons/io';
+import Select from 'react-select';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { showProducts } from '../../services/API/server';
 
-const product = [
-  {
-    name: 'Bacon',
-    price: 59.90,
-    image: 'https://images.tcdn.com.br/img/img_prod/829376/bacon_artesanal_f_a_em_peca_250g_15_1_3e234c42d3aea5c9b3646d56d0b0ccf5.jpg',
-  },
-  {
-    name: 'Presunto',
-    price: 39.90,
-    image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-  },
-  {
-    name: 'Presunto',
-    price: 39.90,
-    image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-  },
-  {
-    name: 'Bacon',
-    price: 59.90,
-    image: 'https://images.tcdn.com.br/img/img_prod/829376/bacon_artesanal_f_a_em_peca_250g_15_1_3e234c42d3aea5c9b3646d56d0b0ccf5.jpg',
-  },
-  {
-    name: 'Presunto',
-    price: 39.90,
-    image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-  },
-  {
-    name: 'Presunto',
-    price: 39.90,
-    image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
-  },
-];
+// const product = [
+//   {
+//     name: 'Bacon',
+//     price: 59.90,
+//     image: 'https://images.tcdn.com.br/img/img_prod/829376/bacon_artesanal_f_a_em_peca_250g_15_1_3e234c42d3aea5c9b3646d56d0b0ccf5.jpg',
+//   },
+//   {
+//     name: 'Presunto',
+//     price: 39.90,
+//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
+//   },
+//   {
+//     name: 'Presunto',
+//     price: 39.90,
+//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
+//   },
+//   {
+//     name: 'Bacon',
+//     price: 59.90,
+//     image: 'https://images.tcdn.com.br/img/img_prod/829376/bacon_artesanal_f_a_em_peca_250g_15_1_3e234c42d3aea5c9b3646d56d0b0ccf5.jpg',
+//   },
+//   {
+//     name: 'Presunto',
+//     price: 39.90,
+//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
+//   },
+//   {
+//     name: 'Presunto',
+//     price: 39.90,
+//     image: 'https://abcemcasa.vteximg.com.br/arquivos/ids/306819-1000-1000/PRES-GOURMET-SEARA-KG-DEF.jpg?v=637445924818900000',
+//   },
+// ];
 
-const Category = () => {
+const Category = ({ category }) => {
+  const navigate = useNavigate();
   const [changeArrowCat1, setChangeArrowCat1] = useState(false);
   const [changeArrowCat2, setChangeArrowCat2] = useState(false);
   const [changeArrowCat3, setChangeArrowCat3] = useState(false);
+  const [products, setProducts] = useState([]);
+  const options = [
+    { value: 'Mais recentes', label: 'Mais recentes' },
+    { value: 'Menor preço', label: 'Menor preço' },
+    { value: 'Maior preço', label: 'Maior preço' },
+  ];
+
+  function listProducts() {
+    const query = `?page=${category}`;
+
+    const req = showProducts(query);
+    req.then((res) => {
+      setProducts(res.data);
+    });
+  }
+
+  useEffect(() => {
+    listProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function goTo(path) {
+    navigate(path);
+  }
 
   function selectedCategory(option) {
     if (option === 1) {
-      setChangeArrowCat1(!changeArrowCat1);
+      setChangeArrowCat1(true);
       setChangeArrowCat2(false);
       setChangeArrowCat3(false);
+      goTo('/category/smoked');
     } else if (option === 2) {
-      setChangeArrowCat2(!changeArrowCat2);
+      setChangeArrowCat2(true);
       setChangeArrowCat1(false);
       setChangeArrowCat3(false);
+      goTo('/category/jams');
     } else {
-      setChangeArrowCat3(!changeArrowCat3);
+      setChangeArrowCat3(true);
       setChangeArrowCat1(false);
       setChangeArrowCat2(false);
+      goTo('/category/sauces');
     }
   }
 
@@ -91,15 +122,18 @@ const Category = () => {
         </Menu>
         <Products>
           <Sort>
-            <h2>Ordenado por</h2>
+            <div>
+              <h2>Ordenado por</h2>
+              <Select options={options} />
+            </div>
             <h2>
-              {product.length}
+              {products.length}
               {' '}
               produtos encontrados
             </h2>
           </Sort>
           <Product>
-            {product.map((p) => (
+            {products.map((p) => (
               <Content>
                 <img src={p.image} alt={p.name} />
                 <Info>{p.name}</Info>
@@ -166,9 +200,14 @@ const Sort = styled.div`
   justify-content: space-between;
   padding: 10px 15px;
 
+  div{
+    display: flex;
+  }
+
   h2{
     font-size: 18px;
     color: #000;
+    margin-right: 10px;
   }
 `;
 

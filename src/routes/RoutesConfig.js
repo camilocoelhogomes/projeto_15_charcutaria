@@ -5,13 +5,13 @@ import {
   Route,
 } from 'react-router-dom';
 import Category from '../pages/Category/Category';
-import Page2 from '../pages/Page2/Page2';
 
 const RoutesConfig = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Category />} exact />
-      <Route path="/2" element={<Page2 />} exact />
+      <Route path="/category/smoked" element={<Category category="smoked" />} exact />
+      <Route path="/category/jams" element={<Category category="jams" />} exact />
+      <Route path="/category/sauces" element={<Category category="sauces" />} exact />
     </Routes>
   </BrowserRouter>
 );
