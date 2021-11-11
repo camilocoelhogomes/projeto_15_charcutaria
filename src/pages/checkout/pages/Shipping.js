@@ -16,13 +16,16 @@ const Shipping = () => {
   const updateAddress = ({ input, value }) => {
     const newAddress = { ...address };
     newAddress[input] = value;
+    setCepError(false);
     if (value.length === 9) {
       adressApi({ cep: value })
         .then((res) => {
+          if (res.data.erro) {
+            setCepError(true);
+          }
           const apiAddress = res.data;
           setAddress({ ...apiAddress, street: (apiAddress.logradouro + apiAddress.complemento) });
-        })
-        .catch(() => setCepError(true));
+        });
     }
     setAddress(newAddress);
   };
