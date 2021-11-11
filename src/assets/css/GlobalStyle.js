@@ -1,7 +1,35 @@
 /* eslint-disable no-tabs */
 import { createGlobalStyle } from 'styled-components';
+import RalewayRegular from '../fonts/Raleway/Raleway-Medium.ttf';
+import RalewaySemiBold from '../fonts/Raleway/Raleway-SemiBold.ttf';
+import RobotoMedium from '../fonts/Roboto/Roboto-Medium.ttf';
 
 const GlobalStyle = createGlobalStyle`
+
+@font-face {
+    font-family: 'RalewayRegular';
+    src: url(${RalewayRegular}) format('truetype');
+}
+
+@font-face {
+    font-family: 'RalewaySemiBold';
+    src: url(${RalewaySemiBold}) format('truetype');
+}
+
+@font-face {
+    font-family: 'RobotoMedium';
+    src: url(${RobotoMedium}) format('truetype');
+}
+
+:root{
+    --c-dark: #1D1F22;
+    --c-light: #F1F2F3;
+    --c-dark-variant: #43464E;
+    --c-text: #1D1F22;
+    --c-primary: #5ECE7B;
+    --c-danger: #d12727;
+    --c-success: #5ECE7B;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -31,9 +59,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-    background-color: #8F53BF;
-    padding: 24px 16px 16px 16px;
-
+    background-color: #f3f3f3;
 }
 ol, ul {
 	list-style: none;
@@ -51,19 +77,16 @@ table {
 	border-spacing: 0;
 }
 
-h1{
-    font-family: 'SairaStencilOne', sans-serif;
-    font-size: 32px;
-    line-height: 50px;
-    color:#FFFFFF;
-}
-
 h2{
-    font-family: 'RelewayBold';
-    font-size: 26px;
+    font-family: 'RalewayRegular';
+    font-size: 42px;
     line-height: 31px;
-    color:#FFFFFF;
-    font-weight: 700;
+    color: #1D1F22;
+}
+p{
+    color: var(--c-dark-variant);
+    font-size: 14px;
+    font-family: 'RobotoMedium';
 }
 
 input:focus, textarea:focus, select:focus{
@@ -78,6 +101,8 @@ button{
   background-color: inherit;
   border: none;
 }
+
+
 `;
 
 export default GlobalStyle;
