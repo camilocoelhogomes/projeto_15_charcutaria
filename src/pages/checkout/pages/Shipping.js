@@ -82,7 +82,7 @@ const Shipping = () => {
         </div>
         <div className="error-area">
           <SignInput
-            placeholder="cep"
+            placeholder="País"
             type="text"
             value="Brasil"
             required
