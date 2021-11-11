@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { IoIosArrowForward, IoIosArrowDown } from 'react-icons/io';
+import {
+  Body, Menu, ProductCategory, Option, Products, Product, Sort, Select, Content, Info, Price,
+} from '../../assets/css/CategoryStyle';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { showProducts } from '../../services/API/server';
@@ -27,6 +29,10 @@ const Category = ({ category }) => {
   }
 
   useEffect(() => {
+    if (category === 'smoked') setChangeArrowCat1(true);
+    else if (category === 'jams') setChangeArrowCat2(true);
+    else if (category === 'sauces') setChangeArrowCat3(true);
+
     listProducts();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, filter]);
@@ -98,7 +104,7 @@ const Category = ({ category }) => {
             <h2>
               {products.length}
               {' '}
-              produtos encontrados
+              {products.length === 1 ? 'produto encontrado' : 'produtos encontrados'}
             </h2>
           </Sort>
           <Product>
@@ -121,113 +127,3 @@ const Category = ({ category }) => {
 };
 
 export default Category;
-
-const Body = styled.div`
-  display: flex;
-`;
-
-const Menu = styled.div`
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1{
-    font-size: 28px;
-    margin-bottom: 25px;
-    color: #000;
-  }
-`;
-
-const ProductCategory = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  cursor: pointer;
-`;
-
-const Option = styled.p`
-  font-size: 20px;
-  margin-bottom: 18px;
-  margin-right: 30px;
-  color:  ${(props) => (props.select === true ? '#b30b0b' : '#000')};
-`;
-
-const Products = styled.div`
-  width: 80%;
-`;
-
-const Product = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  cursor: pointer;
-`;
-
-const Sort = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-
-  div{
-    display: flex;
-  }
-
-  h2{
-    font-size: 18px;
-    color: #000;
-    margin-right: 10px;
-  }
-`;
-
-const Select = styled.select`
-  height: 35px;
-  background: #f2d3cb;
-  color: gray;
-  border: none;
-
-  option {
-    color: black;
-    background: white;
-    display: flex;
-    white-space: pre;
-    min-height: 20px;
-    padding: 0px 2px 1px;
-  }
-`;
-
-const Content = styled.div`
-  height: 400px;
-  width: 300px;
-  margin: 15px; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  img{ 
-      height: 300px;
-      width: 95%;
-      margin-bottom: 10px;  
-  }
-  :hover{
-      border-radius: 8px;
-      box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.4);
-  }
-`;
-
-const Info = styled.p`
-  font-size: 15px;
-  margin: 6px 0;
-  align-self: flex-start;
-  margin-left: 7px;
-  font-weight: bold;
-`;
-
-const Price = styled.p`
-  font-size: 20px;
-  margin: 6px 0;
-  align-self: flex-start;
-  margin-left: 7px;
-  font-weight: bold;
-`;
