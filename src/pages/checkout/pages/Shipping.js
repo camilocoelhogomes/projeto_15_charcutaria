@@ -11,14 +11,18 @@ const Shipping = () => {
   const [address, setAddress] = useState({
     cep: '',
   });
+  const [cepError, setCepError] = useState(false);
 
   const updateAddress = ({ input, value }) => {
     const newAddress = { ...address };
     newAddress[input] = value;
     if (value.length === 9) {
-      adressApi({ cep: value }).then((res) => {
-        setAddress(res.data);
-      });
+      adressApi({ cep: value })
+        .then((res) => {
+          const apiAddress = res.data;
+          setAddress({ ...apiAddress, street: (apiAddress.logradouro + apiAddress.complemento) });
+        })
+        .catch(() => setCepError(true));
     }
     setAddress(newAddress);
   };
@@ -60,27 +64,35 @@ const Shipping = () => {
         disabled={!!user.userCpf}
       />
       <div className="two-inputs-area">
-        <SignInput
-          placeholder="cep"
-          type="text"
-          value={address.cep}
-          onChange={(e) => updateAddress({ input: 'cep', value: cepMask(e.target.value) })}
-          required
-          maxLength="9"
-        />
-        <SignInput
-          placeholder="cep"
-          type="text"
-          value="Brasil"
-          required
-          maxLength="9"
-          disabled
-        />
+        <div className="error-area">
+          <SignInput
+            placeholder="cep"
+            type="text"
+            value={address.cep}
+            onChange={(e) => updateAddress({ input: 'cep', value: cepMask(e.target.value) })}
+            required
+            maxLength="9"
+          />
+          <div className="error-alert">
+            <p>{cepError ? 'CEP inexistente' : ''}</p>
+          </div>
+        </div>
+        <div className="error-area">
+          <SignInput
+            placeholder="cep"
+            type="text"
+            value="Brasil"
+            required
+            maxLength="9"
+            disabled
+          />
+          <div className="error-alert" />
+        </div>
       </div>
       <SignInput
         placeholder="Rua"
         type="text"
-        value={(address.street || address.street === '') ? address.street : `${address.logradouro} ${address.complemento}`}
+        value={(address.street) ? address.street : ''}
         onChange={(e) => updateAddress({ input: 'street', value: e.target.value })}
         required
       />
@@ -133,4 +145,18 @@ const StyledShipping = styled.form`
     width: 100%;
     gap: 32px;
   }
+  .error-area{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .error-alert{
+    height: 12px;
+    p{
+    color: var(--c-danger);
+    font-family: 'RobotoMedium';
+    font-size: 12px;
+  }
+}
 `;
