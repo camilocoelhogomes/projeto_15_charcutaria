@@ -82,17 +82,31 @@ select{
     border: none;
     color: #545454;
 }
+h1{
+    font-family: 'RalewaySemiBold';
+    font-size: 28px;
+    margin-bottom: 25px;
+}
 h2{
     font-family: 'RalewayRegular';
-    font-size: 42px;
+    font-size: 20px;
     line-height: 31px;
     color: #1D1F22;
 }
 h3{
     font-family: 'RalewaySemiBold';
-    font-size: 20px;
+    font-size: 18px;
     line-height: 31px;
     color: #1D1F22;
+}
+h4{
+    font-family: 'RalewaySemiBold';
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+h5{
+    font-family: 'RalewaySemiBold';
+    font-size: 14px;
 }
 p{
     color: var(--c-dark-variant);

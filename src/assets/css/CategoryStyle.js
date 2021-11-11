@@ -12,10 +12,6 @@ export const Menu = styled.div`
 
   h1{
     padding-top: 11px;
-    font-family: 'RalewaySemiBold';
-    font-size: 28px;
-    margin-bottom: 25px;
-    color: #000;
   }
 `;
 
@@ -52,17 +48,12 @@ export const Sort = styled.div`
   div{
     display: flex;
   }
-
-  h2{
-    font-size: 18px;
-    color: #000;
-    margin-right: 10px;
-  }
 `;
 
 export const Select = styled.select`
   height: 35px;
   background: #f2d3cb;
+  margin-left: 10px;
 
   option {
     color: black;
@@ -97,14 +88,13 @@ export const Content = styled.div`
   }
 `;
 
-export const Info = styled.h2`
-  font-size: 20px;
+export const Info = styled.h3`
   margin: 6px 0 2px 0;
   align-self: flex-start;
   margin-left: 7px;
 `;
 
-export const Price = styled.h3`
+export const Price = styled.h2`
   margin-bottom: 6px;
   align-self: flex-start;
   margin-left: 7px;
