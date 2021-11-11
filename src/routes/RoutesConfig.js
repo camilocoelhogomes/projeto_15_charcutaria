@@ -10,6 +10,7 @@ import Shipping from '../pages/checkout/pages/Shipping';
 import SignInCheckout from '../pages/checkout/pages/SIgnInCheckout';
 import SignUpCheckout from '../pages/checkout/pages/SignUpCheckout';
 import SignUp from '../pages/SignUp/SignUp';
+import SignIn from '../pages/SignIn/SignIn';
 
 const RoutesConfig = () => (
   <BrowserRouter>
@@ -21,6 +22,7 @@ const RoutesConfig = () => (
         <Route path="/checkout/confirm" exact element={<ConfirmOrder />} />
       </Route>
       <Route path="/sign-up" exact element={<SignUp />} />
+      <Route path="/sign-in" exact element={<SignIn />} />
     </Routes>
   </BrowserRouter>
 );

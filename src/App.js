@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GlobalStyle from './assets/css/GlobalStyle';
 import RoutesConfig from './routes/RoutesConfig';
 import UserContext from './store/UserContext';
@@ -18,8 +18,15 @@ function App() {
     setUser(newUser);
   };
 
+  useEffect(() => {
+    if (localStorage.getItem('charcutaria')) {
+      const localUser = JSON.parse(localStorage.getItem('charcutaria'));
+      setUser(localUser);
+    }
+  }, []);
+
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, updateUser, setUser }}>
       <GlobalStyle />
       <RoutesConfig />
     </UserContext.Provider>
