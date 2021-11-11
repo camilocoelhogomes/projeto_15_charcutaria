@@ -11,6 +11,7 @@ import SignInCheckout from '../pages/checkout/pages/SIgnInCheckout';
 import SignUpCheckout from '../pages/checkout/pages/SignUpCheckout';
 import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
+import Product from '../pages/Product/Product';
 
 const RoutesConfig = () => (
   <BrowserRouter>
@@ -23,6 +24,7 @@ const RoutesConfig = () => (
       </Route>
       <Route path="/sign-up" exact element={<SignUp />} />
       <Route path="/sign-in" exact element={<SignIn />} />
+      <Route path="/product/:id" exact element={<Product />} />
     </Routes>
   </BrowserRouter>
 );
