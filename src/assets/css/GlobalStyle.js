@@ -76,10 +76,21 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+select{
+    font-family: 'RalewayRegular';
+    font-size: 15px;
+    border: none;
+    color: #545454;
+}
 h2{
     font-family: 'RalewayRegular';
     font-size: 42px;
+    line-height: 31px;
+    color: #1D1F22;
+}
+h3{
+    font-family: 'RalewaySemiBold';
+    font-size: 20px;
     line-height: 31px;
     color: #1D1F22;
 }

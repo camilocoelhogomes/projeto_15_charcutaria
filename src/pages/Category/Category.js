@@ -94,11 +94,11 @@ const Category = ({ category }) => {
         <Products>
           <Sort>
             <div>
-              <h2>Ordenado por</h2>
+              <h2>Ordenar por</h2>
               <Select onChange={(e) => setFilter(e.target.value)}>
-                <option value="recent">Mais recentes</option>
-                <option value="lowest">Menor preço</option>
-                <option value="biggest">Maior preço</option>
+                <option value="recent">mais recentes</option>
+                <option value="lowest">menor preço</option>
+                <option value="biggest">maior preço</option>
               </Select>
             </div>
             <h2>
