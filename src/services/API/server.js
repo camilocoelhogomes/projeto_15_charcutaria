@@ -8,11 +8,18 @@ const signUpConnection = ({
   userName, userLastName, userEmail, userPassword, userConfirmPassword,
 });
 
+const signInConnection = ({
+  userEmail, userPassword,
+}) => axios.post(`${API}/sign-in`, {
+  userEmail, userPassword,
+});
+
 const showProducts = (
   query, sort,
 ) => axios.get(`${API}/category${query}${sort}`);
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
-  signUpConnection, showProducts,
+  signUpConnection,
+  signInConnection,
+  showProducts,
 };
