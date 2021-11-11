@@ -83,6 +83,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  
   img{ 
       height: 300px;
       width: 95%;
