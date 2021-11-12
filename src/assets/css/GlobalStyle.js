@@ -124,9 +124,8 @@ button{
   cursor: pointer;
   background-color: inherit;
   border: none;
+  font-family: 'RalewaySemiBold';
 }
-
-
 `;
 
 export default GlobalStyle;
