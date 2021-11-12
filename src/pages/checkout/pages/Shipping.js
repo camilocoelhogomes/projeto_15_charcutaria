@@ -44,7 +44,7 @@ const Shipping = () => {
         userToken: user.userSessionToken,
       });
     } catch (error) {
-      console.log(error.response);
+      setCepError(true);
     }
   };
 
