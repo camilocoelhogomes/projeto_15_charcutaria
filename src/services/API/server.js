@@ -14,7 +14,12 @@ const signInConnection = ({
   userEmail, userPassword,
 });
 
+const showProducts = (
+  query, sort,
+) => axios.get(`${API}/category${query}${sort}`);
+
 export {
   signUpConnection,
   signInConnection,
+  showProducts,
 };
