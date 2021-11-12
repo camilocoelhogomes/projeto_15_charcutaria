@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowDown } from 'react-icons/io';
 import {
-  Body, Menu, ProductCategory, Option, Products, Product, Sort, Select, Content, Info, Price,
+  Body, Menu, ProductCategory, Option, Products, Product, Sort, Select,
 } from '../../assets/css/CategoryStyle';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import ProductContent from '../../components/ProductContent';
 import { showProducts } from '../../services/API/server';
 
 const Category = ({ category }) => {
@@ -111,14 +112,7 @@ const Category = ({ category }) => {
           </Sort>
           <Product>
             {products.map((p) => (
-              <Content key={p.id}>
-                <img src={p.img} alt={p.name} />
-                <Info>{p.name}</Info>
-                <Price>
-                  R$
-                  {p.price}
-                </Price>
-              </Content>
+              <ProductContent id={p.id} img={p.img} name={p.name} price={p.price} />
             ))}
           </Product>
         </Products>
