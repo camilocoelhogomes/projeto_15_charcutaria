@@ -4,6 +4,7 @@ import UserContext from '../../../store/UserContext';
 import SignInput from '../../../components/SignInput';
 import { cpfMask, cepMask } from '../../../services/mask/mask';
 import adressApi from '../../../services/API/address';
+import { postAddress } from '../../../services/API/server';
 
 const Shipping = () => {
   const { user, updateUser } = useContext(UserContext);
@@ -30,8 +31,25 @@ const Shipping = () => {
     setAddress(newAddress);
   };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await postAddress({
+        userState: address.uf,
+        userCity: address.localidade,
+        userZipCode: address.cep.replace(/\D/g, ''),
+        userStreetAddress: address.street,
+        userNaiborhood: address.bairro,
+        userNumber: Number(address.number),
+        userToken: user.userSessionToken,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
-    <StyledShipping>
+    <StyledShipping onSubmit={submitHandler}>
       <h2>2. Entrega</h2>
       <div className="two-inputs-area">
         <SignInput
@@ -131,6 +149,9 @@ const Shipping = () => {
           disabled
         />
       </div>
+      <button type="submit" className="submit-button">
+        CONFERIR PEDIDO
+      </button>
     </StyledShipping>
   );
 };
@@ -153,7 +174,14 @@ const StyledShipping = styled.form`
     display: flex;
     flex-direction: column;
   }
-
+  .submit-button{
+    height: 52px;
+    width: 272px;
+    background-color: var(--c-primary);
+    font-family: 'RalewaySemiBold';
+    color: var(--c-light);
+    font-size: 16px;
+  }
   .error-alert{
     height: 12px;
     p{
