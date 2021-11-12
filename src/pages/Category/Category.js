@@ -24,8 +24,6 @@ const Category = ({ category }) => {
     const req = showProducts(query, sort);
     req.then((res) => {
       setProducts(res.data);
-      // eslint-disable-next-line no-console
-      console.log(res.data);
     });
     // eslint-disable-next-line no-alert
     req.catch(() => alert('Ocorreu um erro no servidor ao tentar obter os produtos. Tente novamente.'));
@@ -37,8 +35,8 @@ const Category = ({ category }) => {
     else if (category === 'sauces') setChangeArrowCat3(true);
 
     listProducts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, filter]);
+    // eslint-disable-next-line
+    }, [category, filter]);
 
   function goTo(path) {
     navigate(path);

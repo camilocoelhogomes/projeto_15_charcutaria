@@ -52,7 +52,7 @@ export const Sort = styled.div`
 
 export const Select = styled.select`
   height: 35px;
-  background: #f2d3cb;
+  background: #FFF;
   margin-left: 10px;
 
   option {

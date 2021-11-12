@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     --c-primary: #5ECE7B;
     --c-danger: #d12727;
     --c-success: #5ECE7B;
+    --c-red: #b30b0b;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -59,7 +60,6 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-    background-color: #f2d3cb;
 }
 ol, ul {
 	list-style: none;
@@ -102,7 +102,6 @@ h3{
 h4{
     font-family: 'RalewaySemiBold';
     font-size: 20px;
-    margin-bottom: 10px;
 }
 h5{
     font-family: 'RalewaySemiBold';
