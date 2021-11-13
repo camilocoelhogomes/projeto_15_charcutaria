@@ -51,16 +51,6 @@ const Shipping = () => {
   return (
     <StyledShipping onSubmit={submitHandler}>
       <h2>2. Entrega</h2>
-      {
-        user.userAddress.length
-          ? user.userAddress[0].map((remoteAddress) => (
-            <UserAddress
-              key={remoteAddress.id}
-              userAddress={remoteAddress}
-            />
-          ))
-          : <></>
-      }
       <div className="two-inputs-area">
         <SignInput
           placeholder="Nome"
@@ -94,6 +84,21 @@ const Shipping = () => {
         maxLength="14"
         disabled={!!user.userCpf}
       />
+      <p>Escolha entre seus endereços ou adicione um novo</p>
+      <div className="address-list">
+        {
+        user.userAddress.length
+          ? user.userAddress[0].map((remoteAddress, index) => (
+            <UserAddress
+              key={remoteAddress.id}
+              userAddress={remoteAddress}
+              addressNumber={index}
+            />
+          ))
+          : <></>
+      }
+      </div>
+      <h3>Adicionar Endereço</h3>
       <div className="two-inputs-area">
         <div className="error-area">
           <SignInput
@@ -172,6 +177,12 @@ const StyledShipping = styled.form`
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  .address-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
 
   .two-inputs-area{
     display: flex;

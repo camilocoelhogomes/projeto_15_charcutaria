@@ -17,7 +17,7 @@ const DataArea = ({ inputLabel, inputValue }) => (
   </div>
 );
 
-const UserAddress = ({ userAddress }) => {
+const UserAddress = ({ userAddress, addressNumber }) => {
   // eslint-disable-next-line no-unused-vars
   const [disableForm, setDisableForm] = useState(true);
   const {
@@ -31,6 +31,11 @@ const UserAddress = ({ userAddress }) => {
 
   return (
     <StyledUserAddress disabled={disableForm}>
+      <h4>
+        Endereço
+        {' '}
+        {addressNumber + 1}
+      </h4>
       <div className="two-inputs-area">
         <DataArea inputLabel="CEP:" inputValue={zipCode} />
         <DataArea inputLabel="País:" inputValue="Brasil" />
