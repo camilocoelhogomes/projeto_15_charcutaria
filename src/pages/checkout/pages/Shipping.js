@@ -26,7 +26,6 @@ const Shipping = () => {
             setCepError(true);
           }
           const apiAddress = res.data;
-          console.log(apiAddress);
           setAddress({ ...apiAddress, street: (apiAddress.logradouro + apiAddress.complemento) });
         });
     }
@@ -49,7 +48,6 @@ const Shipping = () => {
       setCepError(true);
     }
   };
-  console.log(user.userAddress[0][0]);
   return (
     <StyledShipping onSubmit={submitHandler}>
       <h2>2. Entrega</h2>
