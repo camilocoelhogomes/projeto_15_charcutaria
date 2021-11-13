@@ -59,7 +59,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-    background-color: #f3f3f3;
+    background-color: #f2d3cb;
 }
 ol, ul {
 	list-style: none;
@@ -76,12 +76,37 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+select{
+    font-family: 'RalewayRegular';
+    font-size: 15px;
+    border: none;
+    color: #545454;
+}
+h1{
+    font-family: 'RalewaySemiBold';
+    font-size: 28px;
+    margin-bottom: 25px;
+}
 h2{
     font-family: 'RalewayRegular';
-    font-size: 42px;
+    font-size: 20px;
     line-height: 31px;
     color: #1D1F22;
+}
+h3{
+    font-family: 'RalewaySemiBold';
+    font-size: 18px;
+    line-height: 31px;
+    color: #1D1F22;
+}
+h4{
+    font-family: 'RalewaySemiBold';
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+h5{
+    font-family: 'RalewaySemiBold';
+    font-size: 14px;
 }
 p{
     color: var(--c-dark-variant);

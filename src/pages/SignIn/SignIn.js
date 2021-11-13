@@ -13,6 +13,7 @@ const SignIn = () => {
 
   useEffect(() => {
     updateUser({ input: 'userPassword', value: '' });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = (e) => {

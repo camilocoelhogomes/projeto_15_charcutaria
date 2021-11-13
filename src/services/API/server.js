@@ -32,11 +32,15 @@ const postAddress = ({
     userStreetAddress,
     userNaiborhood,
     userNumber,
-  },
-  createHeaders(userToken));
+  }, createHeaders(userToken));
+
+const showProducts = (
+  query, sort,
+) => axios.get(`${API}/category${query}${sort}`);
 
 export {
   signUpConnection,
   signInConnection,
   postAddress,
+  showProducts,
 };
