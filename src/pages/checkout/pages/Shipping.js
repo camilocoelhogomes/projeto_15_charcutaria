@@ -5,6 +5,7 @@ import SignInput from '../../../components/SignInput';
 import { cpfMask, cepMask } from '../../../services/mask/mask';
 import adressApi from '../../../services/API/address';
 import { postAddress } from '../../../services/API/server';
+import UserAddress from '../components/UserAddres';
 
 const Shipping = () => {
   const { user, updateUser } = useContext(UserContext);
@@ -25,6 +26,7 @@ const Shipping = () => {
             setCepError(true);
           }
           const apiAddress = res.data;
+          console.log(apiAddress);
           setAddress({ ...apiAddress, street: (apiAddress.logradouro + apiAddress.complemento) });
         });
     }
@@ -47,10 +49,20 @@ const Shipping = () => {
       setCepError(true);
     }
   };
-
+  console.log(user.userAddress[0][0]);
   return (
     <StyledShipping onSubmit={submitHandler}>
       <h2>2. Entrega</h2>
+      {
+        user.userAddress.length
+          ? user.userAddress[0].map((remoteAddress) => (
+            <UserAddress
+              key={remoteAddress.id}
+              userAddress={remoteAddress}
+            />
+          ))
+          : <></>
+      }
       <div className="two-inputs-area">
         <SignInput
           placeholder="Nome"
