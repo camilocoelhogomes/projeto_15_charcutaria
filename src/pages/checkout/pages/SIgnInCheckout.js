@@ -7,7 +7,7 @@ import UserContext from '../../../store/UserContext';
 import LogInButton from '../../../components/LogInButton';
 
 const SignInCheckout = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
@@ -18,7 +18,11 @@ const SignInCheckout = () => {
       !passwordPatter.test(user.userPassword)
     ) { setError(true); return; }
     signInConnection({ ...user })
-      .then(() => navigate('/checkout/shipping'))
+      .then((res) => {
+        setUser(res.data);
+        localStorage.setItem('charcutaria', JSON.stringify(res.data));
+        navigate('/checkout/shipping');
+      })
       .catch(() => { setError(true); });
   };
 
