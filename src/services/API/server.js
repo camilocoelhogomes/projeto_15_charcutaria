@@ -18,8 +18,13 @@ const showProducts = (
   query, sort,
 ) => axios.get(`${API}/category${query}${sort}`);
 
+const showProductData = (
+  id,
+) => axios.get(`${API}/product/${id}`);
+
 export {
   signUpConnection,
   signInConnection,
   showProducts,
+  showProductData,
 };

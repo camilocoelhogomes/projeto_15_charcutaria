@@ -1,47 +1,70 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import { showProductData } from '../../services/API/server';
 
-const Product = () => (
-  <>
-    <Header />
-    <Content>
-      <Image>
-        <img src="https://images.tcdn.com.br/img/img_prod/829376/bacon_artesanal_f_a_em_peca_250g_15_1_3e234c42d3aea5c9b3646d56d0b0ccf5.jpg" alt="bacon" />
-      </Image>
-      <Data>
-        <h1>Bacon Artesanal em Pedaço 250g</h1>
-        <h2>Marca: De Bacon a Vida Charcutaria</h2>
-        <h2>Disponibilidade: Em estoque</h2>
-        <h3>R$ 17,90</h3>
-        <div>
-          <Quantity>
-            <LessPlusButton>
-              -
-            </LessPlusButton>
-            <h4>0</h4>
-            <LessPlusButton>
-              +
-            </LessPlusButton>
-          </Quantity>
-          <AddToCart>
-            ADICIONAR AO CARRINHO
-          </AddToCart>
-        </div>
-      </Data>
-    </Content>
-    <Description>
-      <h2>Descrição</h2>
-      <div />
-      <Text>
-        O Bacon Granulado Artesanal F.A. é o produto mais especial da nossa linha. Feito com um processo totalmente artesanal, desde a seleção da matéria prima, passando por 8 dias em cura, e depois defumado naturalmente com lenha de macieira por até 8 horas. O granulado é preparado após o processo do bacon, onde para conseguir 1kg do produto é necessário pelo menos 7kgs de Bacon em Manta!
-      </Text>
-    </Description>
-    <Footer />
-  </>
-);
+const Product = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+
+  function productData() {
+    const req = showProductData(id);
+    req.then((res) => setProduct(res.data));
+    // eslint-disable-next-line no-alert
+    req.catch(() => alert('Ocorreu um erro ao tentar exibir os dados do produto. Tente novamente.'));
+  }
+
+  useEffect(() => {
+    productData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <Content>
+        <Image>
+          <img src={product.img} alt={product.name} />
+        </Image>
+        <Data>
+          <h1>{product.name}</h1>
+          <h2>Marca: De Bacon a Vida Charcutaria</h2>
+          <h2>Disponibilidade: Em estoque</h2>
+          <h3>
+            R$
+            {' '}
+            {product.price}
+          </h3>
+          <div>
+            <Quantity>
+              <LessPlusButton>
+                -
+              </LessPlusButton>
+              <h4>0</h4>
+              <LessPlusButton>
+                +
+              </LessPlusButton>
+            </Quantity>
+            <AddToCart>
+              ADICIONAR AO CARRINHO
+            </AddToCart>
+          </div>
+        </Data>
+      </Content>
+      <Description>
+        <h2>Descrição</h2>
+        <div />
+        <Text>
+          {product.description}
+        </Text>
+      </Description>
+      <Footer />
+    </>
+  );
+};
 
 export default Product;
 
