@@ -80,7 +80,7 @@ export const Content = styled.div`
   img{ 
       height: 300px;
       width: 95%;
-      margin-bottom: 10px;  
+      margin-bottom: 10px;
   }
   :hover{
       border-radius: 8px;

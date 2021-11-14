@@ -9,10 +9,14 @@ import { showProductData } from '../../services/API/server';
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const [disabled, setDisabled] = useState(false);
 
   function productData() {
     const req = showProductData(id);
-    req.then((res) => setProduct(res.data));
+    req.then((res) => {
+      setProduct(res.data);
+      if (res.data.stock === 0) setDisabled(true);
+    });
     // eslint-disable-next-line no-alert
     req.catch(() => alert('Ocorreu um erro ao tentar exibir os dados do produto. Tente novamente.'));
   }
@@ -34,12 +38,12 @@ const Product = () => {
           <h2>
             Marca:
             {' '}
-            {product.brand}
+            {product.brand_name}
           </h2>
           <h2>
             Disponibilidade:
             {' '}
-            {product.stockTotal === 0 ? 'Esgotado' : 'Em estoque'}
+            {product.stock === 0 ? 'Esgotado' : 'Em estoque'}
           </h2>
           <h3>
             R$
@@ -48,16 +52,16 @@ const Product = () => {
           </h3>
           <div>
             <Quantity>
-              <LessPlusButton>
+              <LessPlusButton disabled={disabled}>
                 -
               </LessPlusButton>
               <h4>0</h4>
-              <LessPlusButton>
+              <LessPlusButton disabled={disabled}>
                 +
               </LessPlusButton>
             </Quantity>
-            <AddToCart>
-              ADICIONAR AO CARRINHO
+            <AddToCart disabled={disabled}>
+              {disabled ? 'INDISPONÍVEL' : 'ADICIONAR AO CARRINHO'}
             </AddToCart>
           </div>
         </Data>
@@ -129,15 +133,17 @@ const Quantity = styled.div`
 const LessPlusButton = styled.button`
   color: var(--c-text);
   font-size: 20px;
+  cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
 `;
 
 const AddToCart = styled.button`
-  background-color: var(--c-primary);
+  background-color: ${(props) => (props.disabled ? 'var(--c-dark-variant)' : 'var(--c-primary)')};
   width: 197px;
   height: 52px;
   margin-left: 24px;
   color: #FFF;
   font-size: 16px;
+  cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
 `;
 
 const Description = styled.div`

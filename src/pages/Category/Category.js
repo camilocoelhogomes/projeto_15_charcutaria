@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowDown } from 'react-icons/io';
@@ -22,9 +23,7 @@ const Category = ({ category }) => {
     const sort = `&orderBy=${filter}`;
 
     const req = showProducts(query, sort);
-    req.then((res) => {
-      setProducts(res.data);
-    });
+    req.then((res) => setProducts(res.data));
     // eslint-disable-next-line no-alert
     req.catch(() => alert('Ocorreu um erro no servidor ao tentar obter os produtos. Tente novamente.'));
   }
