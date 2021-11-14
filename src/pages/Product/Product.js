@@ -31,8 +31,16 @@ const Product = () => {
         </Image>
         <Data>
           <h1>{product.name}</h1>
-          <h2>Marca: De Bacon a Vida Charcutaria</h2>
-          <h2>Disponibilidade: Em estoque</h2>
+          <h2>
+            Marca:
+            {' '}
+            {product.brand}
+          </h2>
+          <h2>
+            Disponibilidade:
+            {' '}
+            {product.stockTotal === 0 ? 'Esgotado' : 'Em estoque'}
+          </h2>
           <h3>
             R$
             {' '}

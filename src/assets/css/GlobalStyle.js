@@ -52,6 +52,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	font-family: 'RelewayBold';
+    text-decoration: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -92,6 +93,7 @@ h2{
     font-size: 20px;
     line-height: 31px;
     color: #1D1F22;
+
 }
 h3{
     font-family: 'RalewaySemiBold';
