@@ -12,10 +12,12 @@ import SignInCheckout from '../pages/checkout/pages/SIgnInCheckout';
 import SignUpCheckout from '../pages/checkout/pages/SignUpCheckout';
 import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
+import HomePage from '../pages/HomePage/HomePage';
 
 const RoutesConfig = () => (
   <BrowserRouter>
     <Routes>
+      <Route path="/" element={<HomePage />} exact />
       <Route path="/checkout" element={<Checkout />} exact>
         <Route path="/checkout/sign-up" exact element={<SignUpCheckout />} />
         <Route path="/checkout/sign-in" exact element={<SignInCheckout />} />
