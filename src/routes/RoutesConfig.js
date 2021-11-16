@@ -15,6 +15,7 @@ import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
 import Product from '../pages/Product/Product';
 import UserContext from '../store/UserContext';
+import HomePage from '../pages/HomePage/HomePage';
 
 const RoutesConfig = () => {
   const { setUser } = useContext(UserContext);
@@ -35,6 +36,7 @@ const RoutesConfig = () => {
           <Route path="/checkout/shipping" exact element={<Shipping />} />
           <Route path="/checkout/confirm" exact element={<ConfirmOrder />} />
         </Route>
+        <Route path="/" exact element={<HomePage />} />
         <Route path="/sign-up" exact element={<SignUp />} />
         <Route path="/sign-in" exact element={<SignIn />} />
         <Route path="/category/smoked" element={<Category category="smoked" />} exact />

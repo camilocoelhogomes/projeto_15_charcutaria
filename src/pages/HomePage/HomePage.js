@@ -17,17 +17,17 @@ const HomePage = () => (
       <h1>Categorias</h1>
     </Text>
     <Buttons>
-      <Link to="/products/smoked">
+      <Link to="/category/smoked">
         <Option>
           Defumados
         </Option>
       </Link>
-      <Link to="/products/jams">
+      <Link to="/category/jams">
         <Option>
           Geléias
         </Option>
       </Link>
-      <Link to="/products/sauces">
+      <Link to="/category/sauces">
         <Option>
           Molhos
         </Option>
