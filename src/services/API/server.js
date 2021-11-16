@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = 'http://localhost:4000';
+const API = 'https://back-charcutaria.herokuapp.com';
 
 const createHeaders = (token) => ({ headers: { Authorization: `Bearer ${token}` } });
 
