@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -13,24 +14,36 @@ import SignUpCheckout from '../pages/checkout/pages/SignUpCheckout';
 import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
 import Product from '../pages/Product/Product';
+import UserContext from '../store/UserContext';
 
-const RoutesConfig = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/checkout" element={<Checkout />} exact>
-        <Route path="/checkout/sign-up" exact element={<SignUpCheckout />} />
-        <Route path="/checkout/sign-in" exact element={<SignInCheckout />} />
-        <Route path="/checkout/shipping" exact element={<Shipping />} />
-        <Route path="/checkout/confirm" exact element={<ConfirmOrder />} />
-      </Route>
-      <Route path="/sign-up" exact element={<SignUp />} />
-      <Route path="/sign-in" exact element={<SignIn />} />
-      <Route path="/category/smoked" element={<Category category="smoked" />} exact />
-      <Route path="/category/jams" element={<Category category="jams" />} exact />
-      <Route path="/category/sauces" element={<Category category="sauces" />} exact />
-      <Route path="/product/:id" exact element={<Product />} />
-    </Routes>
-  </BrowserRouter>
-);
+const RoutesConfig = () => {
+  const { setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    if (localStorage.getItem('charcutaria')) {
+      const localUser = JSON.parse(localStorage.getItem('charcutaria'));
+      setUser(localUser);
+    }
+  }, []);
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/checkout" element={<Checkout />} exact>
+          <Route path="/checkout/sign-up" exact element={<SignUpCheckout />} />
+          <Route path="/checkout/sign-in" exact element={<SignInCheckout />} />
+          <Route path="/checkout/shipping" exact element={<Shipping />} />
+          <Route path="/checkout/confirm" exact element={<ConfirmOrder />} />
+        </Route>
+        <Route path="/sign-up" exact element={<SignUp />} />
+        <Route path="/sign-in" exact element={<SignIn />} />
+        <Route path="/category/smoked" element={<Category category="smoked" />} exact />
+        <Route path="/category/jams" element={<Category category="jams" />} exact />
+        <Route path="/category/sauces" element={<Category category="sauces" />} exact />
+        <Route path="/product/:id" exact element={<Product />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default RoutesConfig;
