@@ -12,11 +12,13 @@ const Product = () => {
   const [product, setProduct] = useState([]);
   const [disabled, setDisabled] = useState(false);
   const { user, updateUser } = useContext(UserContext);
+  const [cart, setCart] = useState(user.cart ? user.cart : []);
 
   function productData() {
     const req = showProductData(id);
     req.then((res) => {
       setProduct(res.data);
+      // eslint-disable-next-line no-debugger
       if (res.data.stock === 0) setDisabled(true);
     });
     // eslint-disable-next-line no-alert
@@ -29,11 +31,10 @@ const Product = () => {
   }, []);
 
   function addToCart() {
-    const newUser = { ...user };
-    if (newUser.cart) {
-      newUser.cart.push(product);
-    }
-    updateUser({ input: 'cart', value: newUser.cart });
+    const newCart = [...cart];
+    newCart.push(product);
+    setCart(newCart);
+    updateUser({ input: 'cart', value: cart });
   }
 
   return (
@@ -44,11 +45,13 @@ const Product = () => {
           <img src={product.img} alt={product.name} />
         </Image>
         <Data>
-          <h1>{product.name}</h1>
+          <h1>
+            {product.name}
+          </h1>
           <h2>
             Marca:
             {' '}
-            {product.brand_name}
+            {product.brandsName}
           </h2>
           <h2>
             Disponibilidade:
@@ -56,9 +59,7 @@ const Product = () => {
             {product.stock === 0 ? 'Esgotado' : 'Em estoque'}
           </h2>
           <h3>
-            R$
-            {' '}
-            {product.price}
+            {Number(product.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
           </h3>
           <div>
             <AddToCart disabled={disabled} onClick={() => addToCart()}>
