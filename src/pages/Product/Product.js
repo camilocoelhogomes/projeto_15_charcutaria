@@ -1,15 +1,17 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { showProductData } from '../../services/API/server';
+import UserContext from '../../store/UserContext';
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [disabled, setDisabled] = useState(false);
+  const { user, updateUser } = useContext(UserContext);
 
   function productData() {
     const req = showProductData(id);
@@ -25,6 +27,14 @@ const Product = () => {
     productData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function addToCart() {
+    const newUser = { ...user };
+    if (newUser.cart) {
+      newUser.cart.push(product);
+    }
+    updateUser({ input: 'cart', value: newUser.cart });
+  }
 
   return (
     <>
@@ -51,16 +61,7 @@ const Product = () => {
             {product.price}
           </h3>
           <div>
-            <Quantity>
-              <LessPlusButton disabled={disabled}>
-                -
-              </LessPlusButton>
-              <h4>0</h4>
-              <LessPlusButton disabled={disabled}>
-                +
-              </LessPlusButton>
-            </Quantity>
-            <AddToCart disabled={disabled}>
+            <AddToCart disabled={disabled} onClick={() => addToCart()}>
               {disabled ? 'INDISPONÍVEL' : 'ADICIONAR AO CARRINHO'}
             </AddToCart>
           </div>
@@ -121,26 +122,10 @@ const Data = styled.div`
     }
 `;
 
-const Quantity = styled.div`
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 111px;
-  height: 52px;
-`;
-
-const LessPlusButton = styled.button`
-  color: var(--c-text);
-  font-size: 20px;
-  cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
-`;
-
 const AddToCart = styled.button`
   background-color: ${(props) => (props.disabled ? 'var(--c-dark-variant)' : 'var(--c-primary)')};
   width: 197px;
   height: 52px;
-  margin-left: 24px;
   color: #FFF;
   font-size: 16px;
   cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
