@@ -14,10 +14,12 @@ const Shipping = () => {
     cep: '',
   });
   const [cepError, setCepError] = useState(false);
-
+  const [formAddress, setFormAddress] = useState({
+    cep: '',
+  });
   const updateAddress = ({ input, value }) => {
-    const newAddress = { ...address };
-    newAddress[input] = value;
+    const newFormAddress = { ...formAddress };
+    newFormAddress[input] = value;
     setCepError(false);
     if (value.length === 9) {
       adressApi({ cep: value })
@@ -26,22 +28,27 @@ const Shipping = () => {
             setCepError(true);
           }
           const apiAddress = res.data;
-          setAddress({ ...apiAddress, street: (apiAddress.logradouro + apiAddress.complemento) });
+          setFormAddress(
+            {
+              ...apiAddress,
+              street: (apiAddress.logradouro + apiAddress.complemento),
+            },
+          );
         });
     }
-    setAddress(newAddress);
+    setFormAddress(newFormAddress);
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       await postAddress({
-        userState: address.uf,
-        userCity: address.localidade,
-        userZipCode: address.cep.replace(/\D/g, ''),
-        userStreetAddress: address.street,
-        userNaiborhood: address.bairro,
-        userNumber: Number(address.number),
+        userState: formAddress.uf,
+        userCity: formAddress.localidade,
+        userZipCode: formAddress.cep.replace(/\D/g, ''),
+        userStreetAddress: formAddress.street,
+        userNaiborhood: formAddress.bairro,
+        userNumber: Number(formAddress.number),
         userToken: user.userSessionToken,
       });
     } catch (error) {
@@ -87,12 +94,14 @@ const Shipping = () => {
       <p>Escolha entre seus endereços ou adicione um novo</p>
       <div className="address-list">
         {
-        user.userAddress.length
+        user.userAddress && user.userAddress.length
           ? user.userAddress[0].map((remoteAddress, index) => (
             <UserAddress
               key={remoteAddress.id}
               userAddress={remoteAddress}
               addressNumber={index}
+              setAddress={setAddress}
+              address={address}
             />
           ))
           : <></>
@@ -104,7 +113,7 @@ const Shipping = () => {
           <SignInput
             placeholder="cep"
             type="text"
-            value={address.cep}
+            value={formAddress.cep}
             onChange={(e) => updateAddress({ input: 'cep', value: cepMask(e.target.value) })}
             required
             maxLength="9"
@@ -128,7 +137,7 @@ const Shipping = () => {
       <SignInput
         placeholder="Rua"
         type="text"
-        value={(address.street) ? address.street : ''}
+        value={(formAddress.street) ? formAddress.street : ''}
         onChange={(e) => updateAddress({ input: 'street', value: e.target.value })}
         required
       />
@@ -136,14 +145,14 @@ const Shipping = () => {
         <SignInput
           placeholder="Número"
           type="text"
-          value={address.number ? address.number : ''}
+          value={formAddress.number ? formAddress.number : ''}
           onChange={(e) => updateAddress({ input: 'number', value: e.target.value.replace(/\D/g, '') })}
           required
         />
         <SignInput
           placeholder="Bairro"
           type="text"
-          value={address.bairro ? address.bairro : ''}
+          value={formAddress.bairro ? formAddress.bairro : ''}
           onChange={(e) => updateAddress({ input: 'bairro', value: e.target.value })}
           required
         />
@@ -152,14 +161,14 @@ const Shipping = () => {
         <SignInput
           placeholder="Cidade"
           type="text"
-          value={address.localidade ? address.localidade : ''}
+          value={formAddress.localidade ? formAddress.localidade : ''}
           required
           disabled
         />
         <SignInput
           placeholder="Estado"
           type="text"
-          value={address.uf ? address.uf : ''}
+          value={formAddress.uf ? formAddress.uf : ''}
           required
           disabled
         />

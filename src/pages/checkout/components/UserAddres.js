@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SignInput from '../../../components/SignInput';
 
@@ -13,14 +13,17 @@ const DataArea = ({ inputLabel, inputValue }) => (
       value={inputValue}
       required
       maxLength="9"
+      disabled
     />
   </div>
 );
 
-const UserAddress = ({ userAddress, addressNumber }) => {
+const UserAddress = ({
+  userAddress, addressNumber, setAddress, address,
+}) => {
   // eslint-disable-next-line no-unused-vars
-  const [disableForm, setDisableForm] = useState(true);
   const {
+    id,
     city,
     neighborhood,
     number,
@@ -29,8 +32,12 @@ const UserAddress = ({ userAddress, addressNumber }) => {
     zip_code: zipCode,
   } = userAddress;
 
+  const onPress = () => {
+    setAddress(userAddress);
+  };
+
   return (
-    <StyledUserAddress disabled={disableForm}>
+    <StyledUserAddress onClick={onPress} isAddress={address.id && id === address.id}>
       <h4>
         Endereço
         {' '}
@@ -59,7 +66,10 @@ const StyledUserAddress = styled.div`
 display: flex;
   flex-direction: column;
   gap: 8px;
-
+  border: ${({ isAddress }) => (isAddress ? '2px solid green' : '2px solid white')};
+  padding: 8px;
+  box-sizing: border-box;
+  
   .two-inputs-area{
     display: flex;
     flex-direction: row;
