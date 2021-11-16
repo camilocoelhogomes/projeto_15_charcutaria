@@ -10,6 +10,15 @@ const Header = () => (
       <Link to="/">
         <img src={logo} alt="logo" />
       </Link>
+      <Link to="/category/smoked">
+        <h1>Defumados</h1>
+      </Link>
+      <Link to="/category/jams">
+        <h1>Geléias</h1>
+      </Link>
+      <Link to="/category/sauces">
+        <h1>Molhos</h1>
+      </Link>
     </Options>
     <Icons>
       <Link to="/sign-in">
