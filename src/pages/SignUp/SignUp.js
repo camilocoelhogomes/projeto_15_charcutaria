@@ -5,6 +5,7 @@ import SignUpForm from '../../components/SignUpForm';
 import { signUpConnection } from '../../services/API/server';
 import UserContext from '../../store/UserContext';
 import LogInButton from '../../components/LogInButton';
+import Header from '../../components/Header';
 
 const SignUp = () => {
   const { user } = useContext(UserContext);
@@ -23,21 +24,24 @@ const SignUp = () => {
   };
 
   return (
-    <StyledSignUp>
-      <LogInButton
-        onClick={() => navigate('/sign-in')}
-      >
-        ENTRE NA SUA CONTA
-      </LogInButton>
-      <p>Ou preencha os dados a baixo</p>
-      <SignUpForm
-        submitForm={onSubmit}
-        buttonText="CADASTRAR"
-        headerText="Cadastro"
-        emailError={emailError}
-        setEmailError={setEmailError}
-      />
-    </StyledSignUp>
+    <>
+      <Header />
+      <StyledSignUp>
+        <LogInButton
+          onClick={() => navigate('/sign-in')}
+        >
+          ENTRE NA SUA CONTA
+        </LogInButton>
+        <p>Ou preencha os dados a baixo</p>
+        <SignUpForm
+          submitForm={onSubmit}
+          buttonText="CADASTRAR"
+          headerText="Cadastro"
+          emailError={emailError}
+          setEmailError={setEmailError}
+        />
+      </StyledSignUp>
+    </>
   );
 };
 
@@ -45,8 +49,8 @@ export default SignUp;
 
 const StyledSignUp = styled.div`
   width: 100%;
-  max-width: 1050px;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  padding: 20px;
 `;
