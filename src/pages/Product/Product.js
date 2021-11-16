@@ -1,20 +1,24 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { showProductData } from '../../services/API/server';
+import UserContext from '../../store/UserContext';
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [disabled, setDisabled] = useState(false);
+  const { user, updateUser } = useContext(UserContext);
+  const [cart, setCart] = useState(user.cart ? user.cart : []);
 
   function productData() {
     const req = showProductData(id);
     req.then((res) => {
       setProduct(res.data);
+      // eslint-disable-next-line no-debugger
       if (res.data.stock === 0) setDisabled(true);
     });
     // eslint-disable-next-line no-alert
@@ -26,6 +30,13 @@ const Product = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function addToCart() {
+    const newCart = [...cart];
+    newCart.push(product);
+    setCart(newCart);
+    updateUser({ input: 'cart', value: cart });
+  }
+
   return (
     <>
       <Header />
@@ -34,11 +45,13 @@ const Product = () => {
           <img src={product.img} alt={product.name} />
         </Image>
         <Data>
-          <h1>{product.name}</h1>
+          <h1>
+            {product.name}
+          </h1>
           <h2>
             Marca:
             {' '}
-            {product.brand_name}
+            {product.brandsName}
           </h2>
           <h2>
             Disponibilidade:
@@ -46,21 +59,10 @@ const Product = () => {
             {product.stock === 0 ? 'Esgotado' : 'Em estoque'}
           </h2>
           <h3>
-            R$
-            {' '}
-            {product.price}
+            {Number(product.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
           </h3>
           <div>
-            <Quantity>
-              <LessPlusButton disabled={disabled}>
-                -
-              </LessPlusButton>
-              <h4>0</h4>
-              <LessPlusButton disabled={disabled}>
-                +
-              </LessPlusButton>
-            </Quantity>
-            <AddToCart disabled={disabled}>
+            <AddToCart disabled={disabled} onClick={() => addToCart()}>
               {disabled ? 'INDISPONÍVEL' : 'ADICIONAR AO CARRINHO'}
             </AddToCart>
           </div>
@@ -121,26 +123,10 @@ const Data = styled.div`
     }
 `;
 
-const Quantity = styled.div`
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 111px;
-  height: 52px;
-`;
-
-const LessPlusButton = styled.button`
-  color: var(--c-text);
-  font-size: 20px;
-  cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
-`;
-
 const AddToCart = styled.button`
   background-color: ${(props) => (props.disabled ? 'var(--c-dark-variant)' : 'var(--c-primary)')};
   width: 197px;
   height: 52px;
-  margin-left: 24px;
   color: #FFF;
   font-size: 16px;
   cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};

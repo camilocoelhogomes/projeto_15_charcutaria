@@ -8,8 +8,7 @@ const ProductContent = ({
     <img src={img} alt={name} />
     <Info>{name}</Info>
     <Price>
-      R$
-      {price}
+      { Number(price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
     </Price>
   </Content>
 );
