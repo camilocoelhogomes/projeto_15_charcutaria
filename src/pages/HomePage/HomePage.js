@@ -1,43 +1,66 @@
 /* eslint-disable array-callback-return */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import FrontCover from '../../components/FrontCover';
-import ProductContent from '../../components/ProductContent';
+// import ProductContent from '../../components/ProductContent';
+import { getHomePageProducts } from '../../services/API/server';
 
-const HomePage = () => (
-  <>
-    <Header />
-    <Cover>
-      <FrontCover />
-    </Cover>
-    <Text>
-      <h1>Categorias</h1>
-    </Text>
-    <Buttons>
-      <Option>
-        Defumados
-      </Option>
-      <Option>
-        Geléias
-      </Option>
-      <Option>
-        Molhos
-      </Option>
-    </Buttons>
-    <Text>
-      <h1>Produtos em destaque</h1>
-    </Text>
-    <Highlights>
-      <ProductContent />
-      <ProductContent />
-      <ProductContent />
-    </Highlights>
-    <Footer />
-  </>
-);
+const HomePage = () => {
+  const [products, setProducts] = useState([]);
+  // eslint-disable-next-line no-console
+  console.log(products);
+
+  function homepage() {
+    const req = getHomePageProducts();
+    req.then((res) => setProducts(res.data.length));
+  }
+
+  useEffect(() => {
+    homepage();
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <Cover>
+        <FrontCover />
+      </Cover>
+      <Text>
+        <h1>Categorias</h1>
+      </Text>
+      <Buttons>
+        <Link to="/products/smoked">
+          <Option>
+            Defumados
+          </Option>
+        </Link>
+        <Link to="/products/jams">
+          <Option>
+            Geléias
+          </Option>
+        </Link>
+        <Link to="/products/sauces">
+          <Option>
+            Molhos
+          </Option>
+        </Link>
+      </Buttons>
+      <Text>
+        <h1>Produtos em destaque</h1>
+      </Text>
+      <Highlights>
+        {products.length ? products.map((p, index) => {
+          <h1>{index}</h1>;
+        }) : <></>}
+      </Highlights>
+      <Footer />
+    </>
+  );
+};
 
 export default HomePage;
 
