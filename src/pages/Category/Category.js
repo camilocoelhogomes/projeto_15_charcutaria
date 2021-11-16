@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowDown } from 'react-icons/io';
 import {
   Body, Menu, ProductCategory, Option, Products, Product, Sort, Select,
@@ -33,8 +34,8 @@ const Category = ({ category }) => {
     else if (category === 'sauces') setChangeArrowCat3(true);
 
     listProducts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, filter]);
+    // eslint-disable-next-line
+    }, [category, filter]);
 
   function goTo(path) {
     navigate(path);
@@ -108,7 +109,9 @@ const Category = ({ category }) => {
           </Sort>
           <Product>
             {products.map((p) => (
-              <ProductContent id={p.id} img={p.img} name={p.name} price={p.price} />
+              <Link to={`/product/${p.id}`}>
+                <ProductContent id={p.id} img={p.img} name={p.name} price={p.price} />
+              </Link>
             ))}
           </Product>
         </Products>

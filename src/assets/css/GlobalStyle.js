@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     --c-primary: #5ECE7B;
     --c-danger: #d12727;
     --c-success: #5ECE7B;
+    --c-red: #b30b0b;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -51,6 +52,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	font-family: 'RelewayBold';
+    text-decoration: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -91,6 +93,7 @@ h2{
     font-size: 20px;
     line-height: 31px;
     color: #1D1F22;
+
 }
 h3{
     font-family: 'RalewaySemiBold';
@@ -101,7 +104,6 @@ h3{
 h4{
     font-family: 'RalewaySemiBold';
     font-size: 20px;
-    margin-bottom: 10px;
 }
 h5{
     font-family: 'RalewaySemiBold';
@@ -124,9 +126,8 @@ button{
   cursor: pointer;
   background-color: inherit;
   border: none;
+  font-family: 'RalewaySemiBold';
 }
-
-
 `;
 
 export default GlobalStyle;

@@ -25,12 +25,11 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  cursor: pointer;
 
   img{ 
       height: 300px;
       width: 95%;
-      margin-bottom: 10px;  
+      margin-bottom: 10px;
   }
   :hover{
       border-radius: 8px;

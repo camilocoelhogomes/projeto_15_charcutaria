@@ -28,8 +28,9 @@ const Body = styled.div`
   top: 0;
   left: 0;
   border: none;
-  background-color: #b30b0b;
+  background-color: var(--c-red);
   padding: 0 70px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
 `;
 
 const Options = styled.div`
@@ -37,7 +38,7 @@ const Options = styled.div`
   align-items: center;
   
   h1{
-    color: #000;
+    color: #FFF;
     font-size: 20px;
     margin-right: 15px;
   }
@@ -56,8 +57,10 @@ const Icons = styled.div`
 const CartIcon = styled(AiOutlineShoppingCart)`
   font-size: 30px;
   margin-left: 25px;
+  color: #FFF;
 `;
 
 const UserIcon = styled(AiOutlineUser)`
   font-size: 30px;
+  color: #FFF;
 `;
