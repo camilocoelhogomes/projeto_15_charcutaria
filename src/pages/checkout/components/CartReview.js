@@ -12,7 +12,7 @@ const CartReview = () => {
     if (user.cart === false) {
       navigate('/');
     }
-    console.log(user.cart);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
