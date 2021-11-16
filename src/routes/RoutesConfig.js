@@ -12,6 +12,7 @@ import SignInCheckout from '../pages/checkout/pages/SIgnInCheckout';
 import SignUpCheckout from '../pages/checkout/pages/SignUpCheckout';
 import SignUp from '../pages/SignUp/SignUp';
 import SignIn from '../pages/SignIn/SignIn';
+import Product from '../pages/Product/Product';
 
 const RoutesConfig = () => (
   <BrowserRouter>
@@ -27,6 +28,7 @@ const RoutesConfig = () => (
       <Route path="/category/smoked" element={<Category category="smoked" />} exact />
       <Route path="/category/jams" element={<Category category="jams" />} exact />
       <Route path="/category/sauces" element={<Category category="sauces" />} exact />
+      <Route path="/product/:id" exact element={<Product />} />
     </Routes>
   </BrowserRouter>
 );

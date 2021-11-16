@@ -52,7 +52,7 @@ export const Sort = styled.div`
 
 export const Select = styled.select`
   height: 35px;
-  background: #f2d3cb;
+  background: #FFF;
   margin-left: 10px;
 
   option {
@@ -80,7 +80,7 @@ export const Content = styled.div`
   img{ 
       height: 300px;
       width: 95%;
-      margin-bottom: 10px;  
+      margin-bottom: 10px;
   }
   :hover{
       border-radius: 8px;
