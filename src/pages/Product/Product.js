@@ -35,6 +35,8 @@ const Product = () => {
     newCart.push(product);
     setCart(newCart);
     updateUser({ input: 'cart', value: cart });
+    // eslint-disable-next-line no-alert
+    alert('adicionado ao carrinho');
   }
 
   return (

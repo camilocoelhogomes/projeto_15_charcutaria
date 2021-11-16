@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../../components/Header';
+import CartReview from './components/CartReview';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Checkout = () => {
       <Header />
       <div className="outlet">
         <Outlet />
+        <CartReview />
       </div>
     </StyledSCheckout>
   );
@@ -33,5 +35,7 @@ const StyledSCheckout = styled.div`
 
   .outlet{
     padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
   }
 `;
