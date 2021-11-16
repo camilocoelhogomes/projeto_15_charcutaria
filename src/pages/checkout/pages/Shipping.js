@@ -56,44 +56,45 @@ const Shipping = () => {
     }
   };
   return (
-    <StyledShipping onSubmit={submitHandler}>
-      <h2>2. Entrega</h2>
-      <div className="two-inputs-area">
+    <>
+      <StyledShipping onSubmit={submitHandler}>
+        <h2>2. Entrega</h2>
+        <div className="two-inputs-area">
+          <SignInput
+            placeholder="Nome"
+            value={user.userName}
+            onChange={(e) => updateUser({ input: 'userName', value: e.target.value })}
+            required
+            disabled={!!user.userName}
+          />
+          <SignInput
+            placeholder="Sobrenome"
+            value={user.userLastName}
+            onChange={(e) => updateUser({ input: 'userLastName', value: e.target.value })}
+            required
+            disabled={!!user.userLastName}
+          />
+        </div>
         <SignInput
-          placeholder="Nome"
-          value={user.userName}
-          onChange={(e) => updateUser({ input: 'userName', value: e.target.value })}
+          placeholder="E-mail"
+          type="email"
+          value={user.userEmail}
+          onChange={(e) => { updateUser({ input: 'userEmail', value: e.target.value }); }}
           required
-          disabled={!!user.userName}
+          disabled={!!user.userEmail}
         />
         <SignInput
-          placeholder="Sobrenome"
-          value={user.userLastName}
-          onChange={(e) => updateUser({ input: 'userLastName', value: e.target.value })}
+          placeholder="cpf"
+          type="text"
+          value={user.userCpf ? user.userCpf : newCpf}
+          onChange={(e) => { setNewCpf(cpfMask(e.target.value)); }}
           required
-          disabled={!!user.userLastName}
+          maxLength="14"
+          disabled={!!user.userCpf}
         />
-      </div>
-      <SignInput
-        placeholder="E-mail"
-        type="email"
-        value={user.userEmail}
-        onChange={(e) => { updateUser({ input: 'userEmail', value: e.target.value }); }}
-        required
-        disabled={!!user.userEmail}
-      />
-      <SignInput
-        placeholder="cpf"
-        type="text"
-        value={user.userCpf ? user.userCpf : newCpf}
-        onChange={(e) => { setNewCpf(cpfMask(e.target.value)); }}
-        required
-        maxLength="14"
-        disabled={!!user.userCpf}
-      />
-      <p>Escolha entre seus endereços ou adicione um novo</p>
-      <div className="address-list">
-        {
+        <p>Escolha entre seus endereços ou adicione um novo</p>
+        <div className="address-list">
+          {
         user.userAddress && user.userAddress.length
           ? user.userAddress[0].map((remoteAddress, index) => (
             <UserAddress
@@ -106,77 +107,78 @@ const Shipping = () => {
           ))
           : <></>
       }
-      </div>
-      <h3>Adicionar Endereço</h3>
-      <div className="two-inputs-area">
-        <div className="error-area">
-          <SignInput
-            placeholder="cep"
-            type="text"
-            value={formAddress.cep}
-            onChange={(e) => updateAddress({ input: 'cep', value: cepMask(e.target.value) })}
-            required
-            maxLength="9"
-          />
-          <div className="error-alert">
-            <p>{cepError ? 'CEP inexistente' : ''}</p>
+        </div>
+        <h3>Adicionar Endereço</h3>
+        <div className="two-inputs-area">
+          <div className="error-area">
+            <SignInput
+              placeholder="cep"
+              type="text"
+              value={formAddress.cep}
+              onChange={(e) => updateAddress({ input: 'cep', value: cepMask(e.target.value) })}
+              required
+              maxLength="9"
+            />
+            <div className="error-alert">
+              <p>{cepError ? 'CEP inexistente' : ''}</p>
+            </div>
+          </div>
+          <div className="error-area">
+            <SignInput
+              placeholder="País"
+              type="text"
+              value="Brasil"
+              required
+              maxLength="9"
+              disabled
+            />
+            <div className="error-alert" />
           </div>
         </div>
-        <div className="error-area">
+        <SignInput
+          placeholder="Rua"
+          type="text"
+          value={(formAddress.street) ? formAddress.street : ''}
+          onChange={(e) => updateAddress({ input: 'street', value: e.target.value })}
+          required
+        />
+        <div className="two-inputs-area">
           <SignInput
-            placeholder="País"
+            placeholder="Número"
             type="text"
-            value="Brasil"
+            value={formAddress.number ? formAddress.number : ''}
+            onChange={(e) => updateAddress({ input: 'number', value: e.target.value.replace(/\D/g, '') })}
             required
-            maxLength="9"
+          />
+          <SignInput
+            placeholder="Bairro"
+            type="text"
+            value={formAddress.bairro ? formAddress.bairro : ''}
+            onChange={(e) => updateAddress({ input: 'bairro', value: e.target.value })}
+            required
+          />
+        </div>
+        <div className="two-inputs-area">
+          <SignInput
+            placeholder="Cidade"
+            type="text"
+            value={formAddress.localidade ? formAddress.localidade : ''}
+            required
             disabled
           />
-          <div className="error-alert" />
+          <SignInput
+            placeholder="Estado"
+            type="text"
+            value={formAddress.uf ? formAddress.uf : ''}
+            required
+            disabled
+          />
         </div>
-      </div>
-      <SignInput
-        placeholder="Rua"
-        type="text"
-        value={(formAddress.street) ? formAddress.street : ''}
-        onChange={(e) => updateAddress({ input: 'street', value: e.target.value })}
-        required
-      />
-      <div className="two-inputs-area">
-        <SignInput
-          placeholder="Número"
-          type="text"
-          value={formAddress.number ? formAddress.number : ''}
-          onChange={(e) => updateAddress({ input: 'number', value: e.target.value.replace(/\D/g, '') })}
-          required
-        />
-        <SignInput
-          placeholder="Bairro"
-          type="text"
-          value={formAddress.bairro ? formAddress.bairro : ''}
-          onChange={(e) => updateAddress({ input: 'bairro', value: e.target.value })}
-          required
-        />
-      </div>
-      <div className="two-inputs-area">
-        <SignInput
-          placeholder="Cidade"
-          type="text"
-          value={formAddress.localidade ? formAddress.localidade : ''}
-          required
-          disabled
-        />
-        <SignInput
-          placeholder="Estado"
-          type="text"
-          value={formAddress.uf ? formAddress.uf : ''}
-          required
-          disabled
-        />
-      </div>
-      <button type="submit" className="submit-button">
-        CONFERIR PEDIDO
-      </button>
-    </StyledShipping>
+        <button type="submit" className="submit-button">
+          CONFERIR PEDIDO
+        </button>
+      </StyledShipping>
+    </>
   );
 };
 

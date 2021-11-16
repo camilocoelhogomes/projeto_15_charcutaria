@@ -5,6 +5,7 @@ import LogInButton from '../../components/LogInButton';
 import SignInForm from '../../components/SignInForm';
 import UserContext from '../../store/UserContext';
 import { signInConnection } from '../../services/API/server';
+import Header from '../../components/Header';
 
 const SignIn = () => {
   const { updateUser, user, setUser } = useContext(UserContext);
@@ -33,20 +34,23 @@ const SignIn = () => {
     return true;
   };
   return (
-    <StyledSignIn>
-      <LogInButton
-        onClick={() => navigate('/sign-up')}
-      >
-        CRIAR UMA CONTA
-      </LogInButton>
-      <p>Já tem uma conta? Entre!</p>
-      <SignInForm
-        buttonText="ENTRAR"
-        error={error}
-        setError={setError}
-        submitForm={onSubmit}
-      />
-    </StyledSignIn>
+    <>
+      <Header />
+      <StyledSignIn>
+        <LogInButton
+          onClick={() => navigate('/sign-up')}
+        >
+          CRIAR UMA CONTA
+        </LogInButton>
+        <p>Já tem uma conta? Entre!</p>
+        <SignInForm
+          buttonText="ENTRAR"
+          error={error}
+          setError={setError}
+          submitForm={onSubmit}
+        />
+      </StyledSignIn>
+    </>
   );
 };
 
@@ -54,8 +58,8 @@ export default SignIn;
 
 const StyledSignIn = styled.div`
   width: 100%;
-  max-width: 1050px;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  padding: 20px;
 `;

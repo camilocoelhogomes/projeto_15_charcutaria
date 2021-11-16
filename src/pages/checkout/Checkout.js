@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import Header from '../../components/Header';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ const Checkout = () => {
   []);
   return (
     <StyledSCheckout>
-      <Outlet />
+      <Header />
+      <div className="outlet">
+        <Outlet />
+      </div>
     </StyledSCheckout>
   );
 };
@@ -24,5 +28,10 @@ export default Checkout;
 
 const StyledSCheckout = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 20px;
 
+  .outlet{
+    padding: 0 20px;
+  }
 `;
