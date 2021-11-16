@@ -10,7 +10,6 @@ const Header = () => (
       <Link to="/">
         <img src={logo} alt="logo" />
       </Link>
-      <h1>Nossos produtos</h1>
     </Options>
     <Icons>
       <Link to="/sign-in">
