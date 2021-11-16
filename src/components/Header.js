@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
 import logo from '../assets/logo.svg';
 
 const Header = () => (
   <Body>
     <Options>
-      <img src={logo} alt="logo" />
+      <Link to="/">
+        <img src={logo} alt="logo" />
+      </Link>
       <h1>Nossos produtos</h1>
     </Options>
     <Icons>
-      <UserIcon />
+      <Link to="/sign-in">
+        <UserIcon />
+      </Link>
       <CartIcon />
     </Icons>
   </Body>
