@@ -15,7 +15,9 @@ const Header = () => (
       <Link to="/sign-in">
         <UserIcon />
       </Link>
-      <CartIcon />
+      <Link to="/checkout">
+        <CartIcon />
+      </Link>
     </Icons>
   </Body>
 );
