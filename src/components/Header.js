@@ -7,7 +7,7 @@ const Header = () => (
   <Body>
     <Options>
       <img src={logo} alt="logo" />
-      <h1>Nossos produtos</h1>
+      <h1>Nossosasdasd produtos</h1>
     </Options>
     <Icons>
       <UserIcon />
